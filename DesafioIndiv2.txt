@@ -1,0 +1,149 @@
+XP 37
+DESAFIO INDIVUAL 2: 
+
+Cada objeto descreve um produto e seu respectivo departamento. Independente da quantidade (que você pode determinar através da propriedade length), você terá algumas tarefas a cumprir. Escreva rotinas em Javascript que recebam esta lista de produtos como parâmetros e calcule (1 rotina para cada item)
+
+1 - (OK) Quantidade total de itens em estoque (somatória das quantidades de todos os produtos)
+2 - (OK) Quantidade total de itens em destaque (somatória das quantidades dos itens marcados como "emDestaque : sim")
+3 - (OK) Quantidade total de itens disponíveis (similar ao anterior)
+4 - (OK) Valor total do inventário da empresa (somatória dos valores individuais multiplicado pela quantidade em estoque)
+5 - (OK) Somatória de itens por departamento (você deverá retornar um objeto contendo o nome do departamento e o total de itens nele)
+6 - Valor total do inventário por departamento (similar ao item anterior)
+7 - Valor do ticket médio dos produtos da empresa (basicamente o valor total do inventário dividido pelo número de itens)
+8 - Ticket médio por departamento (similar ao item anterior, porém retornando uma lista de objetos que contenha o nome do departamento e o seu ticket médio)
+9 - (OK) Departamento mais valioso (qual o departamento que tem a maior somatória dos valores dos itens)
+10 - Produto mais caro da loja (bem como seu departamento)
+11 - Produto mais barato da loja (bem como seu departamento)
+
+ENTRADA -----> PROCESSAMENTO -----> SAÍDA
+listaProdutos() -----> Ex 1 - 11 -----> Possibilidades Ex
+
+
+ANOTAÇÕES:
+
+console.log(listaProdutos.length)
+
+console.log(listaProdutos[0])
+
+for(pos=0; pos<listaProdutos.length; pos++){
+    let produto = listaProdutos[pos];
+    console.log(produto.descricao)
+}
+
+for(pos=0; pos<listaProdutos.length; pos++){
+    let produto = listaProdutos[pos];
+    console.log(produto.qtdEstoque)
+}
+
+1)
+let totalProdutos = 0;
+for(pos=0; pos<listaProdutos.length; pos++){
+    let prod = listaProdutos[pos];
+    totalProdutos = totalProdutos + prod.qtdEstoque
+}
+console.log("Total de Itens no Estoque = " +totalProdutos);
+
+2)
+let totalEmDestaque = 0;
+for(pos=0; pos<listaProdutos.length; pos++){
+    let prod = listaProdutos[pos];
+    if(prod.emDestaque == "sim"){
+    	totalEmDestaque = totalEmDestaque + prod.qtdEstoque;
+    }
+}
+console.log("Total de Itens no Estoque em Destaque  = " +totalEmDestaque);
+
+(Exemplo)
+let totalEmDestaque = 0;
+for(pos=0; pos<listaProdutos.length; pos++){
+    let prod = listaProdutos[pos];
+    if(prod.emDestaque == "sim"){
+    	totalEmDestaque = totalEmDestaque + 1;
+    }
+}
+console.log("Total de Itens em Destaque = " +totalEmDestaque);
+
+3)
+let totalDisponivel = 0;
+for(pos=0; pos<listaProdutos.length; pos++){
+    let prod = listaProdutos[pos];
+    if(prod.disponivel == "sim"){
+    	totalDisponivel = totalDisponivel + 1;
+    }
+}
+console.log("Total de Itens Disponíveis = " +totalDisponivel);
+
+4)
+let totalInventario = 0;
+for(pos=0; pos<listaProdutos.length; pos++){
+    let prod = listaProdutos[pos];
+    totalInventario = totalInventario + prod.qtdEstoque * prod.preco;
+}
+console.log("Total do Inventario R$ = " +totalInventario);
+
+5)
+let departamento = {
+	id: 0,
+	nomeDepto: "",
+	qtdEstoque: 0
+}
+let idDepto = 0;
+for(pos=0; pos<listaProdutos.length; pos++){
+   if(idDepto != listaProdutos[pos].departamento.idDepto){
+   	console.log("Estoque do Departamento...");
+   	console.log(departamento);
+   	idDepto = listaProdutos[pos].departamento.idDepto;
+   	departamento.id = idDepto;
+   	departamento.nomeDepto = listaProdutos[pos].departamento.nomeDepto;
+   	departamento.qtdEstoque = listaProdutos[pos].qtdEstoque;
+   }
+   else{
+	departamento.qtdEstoque = departamento.qtdEstoque + listaProdutos[pos].qtdEstoque;
+   }
+}
+
+6)
+
+7)
+
+8)
+
+9)
+let departamento = {
+	id: 0,
+	nomeDepto: "",
+	qtdEstoque: 0
+}
+let departamentoMaisValioso = {
+	id: 0,
+	nomeDepto: "",
+	qtdEstoque: 0
+}
+let idDepto = 0;
+for(pos=0; pos<listaProdutos.length; pos++){
+   if(idDepto != listaProdutos[pos].departamento.idDepto){
+   	console.log("Inventario do Departamento...");
+   	console.log(departamento);
+	if(departamento.inventario > departamentoMaisValioso.inventario){
+		departamentoMaisValioso.id = departamento.id;
+		departamentoMaisValioso.nomeDepto = departamento.nomeDepto;
+		departamentoMaisValioso.inventario = departamento.inventario;
+	}
+   }
+   idDepto = listaProdutos[pos].departamento.idDepto;
+   departamento.id = idDepto;
+   departamento.nomeDepto = listaProdutos[pos].departamento.nomeDepto;
+   departamento.qtdEstoque = listaProdutos[pos].qtdEstoque;
+   }
+   else{
+	departamento.inventario = departamento.inventario + listaProdutos[pos].qtdEstoque * listaProdutos[pos].preco;
+
+   }
+   console.log(departamento);
+   console.log("Departamento mais valioso...");
+   console.log(departamentoMaisValioso);
+}
+
+10)
+
+11)
